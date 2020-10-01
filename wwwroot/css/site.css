@@ -118,8 +118,7 @@ span {
 .item-single {
   border: 1px solid #000;
   width: 500px;
-  height: 600px;
-  padding: 2.5em;
+  padding: 1em;
 }
 
 .note {
