@@ -1,15 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Blazored.Modal;
 using ElectronNET.API;
+using ElectronNET.API.Entities;
 
 namespace DiaryNotes20
 {
@@ -22,9 +18,7 @@ namespace DiaryNotes20
 
     public IConfiguration Configuration { get; }
 
-    // This method is called by the runtime. Use to add services to container.
-    // For more information on how to configure your application, 
-    // visit https://go.microsoft.com/fwlink/?LinkID=398940
+    // This method is called by the runtime; adds required services
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddRazorPages();
@@ -32,8 +26,7 @@ namespace DiaryNotes20
       services.AddBlazoredModal();
     }
 
-    // This method gets called by the runtime. 
-    // Use this method to configure the HTTP request pipeline.
+    // This method gets called by the runtime and creates the app window
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
       if (env.IsDevelopment())
@@ -53,7 +46,22 @@ namespace DiaryNotes20
         endpoints.MapFallbackToPage("/_Host");
       });
 
-      Task.Run(async () => await Electron.WindowManager.CreateWindowAsync());
+      if (HybridSupport.IsElectronActive)
+      {
+        ElectronBootstrap();
+      }
+      // Task.Run(async () => await Electron.WindowManager.CreateWindowAsync());
+    }
+
+    public async void ElectronBootstrap()
+    {
+      var browserWindow = await Electron.WindowManager.CreateWindowAsync(
+        new BrowserWindowOptions { Width = 950, Height = 700, Show = false }
+      );
+
+      await browserWindow.WebContents.Session.ClearCacheAsync();
+      browserWindow.OnReadyToShow += () => browserWindow.Show();
+      browserWindow.SetTitle("DiaryNotes 20");
     }
   }
 }

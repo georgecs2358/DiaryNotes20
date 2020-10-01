@@ -14,6 +14,8 @@ html, body, .main {
   flex: 1;
   background-image: url("../images/background.jpeg");
   background-size: cover;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 button {
@@ -44,14 +46,14 @@ li {
 }
 
 span {
-  padding-right: 0.5em;
+  padding-right: 8px;
 }
 
 .top-row {
   height: 4em;
-  width: 100%;
   top: 0;
   left: 0;
+  right: 2;
   display: flex;
   align-items: center;
   justify-items: flex-start;
@@ -60,13 +62,13 @@ span {
     45deg, rgba(160,160,160,1) 30%, rgba(105,105,105,1) 70%
   );
   border: 1px solid #000;
-  padding: 2px;
+  padding: 0.1em;
 }
 
 .nav-item {
   list-style-type: none;
-  padding-left: 1.5em;
-  width: 200px;
+  padding-left: 1.25em;
+  width: 10em;
 }
 
 .nav-link {
@@ -84,13 +86,14 @@ span {
 }
 
 .content {
-  padding-top: 1em;
   width: 100%;
+  padding-top: 1em;
 }
 
 #main-box {
+  width: 800px;
   border: 1px solid #000;
-  padding: 5px;
+  padding: 0.5em;
   background: #007;
   background: linear-gradient(
     135deg, #005 30%, #009 55%
@@ -98,7 +101,6 @@ span {
 }
 
 .items-grid {
-  padding: 1em;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
