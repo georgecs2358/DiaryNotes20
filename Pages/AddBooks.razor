@@ -1,0 +1,29 @@
+@page "/add-books"
+@inject NavigationManager Navigator
+@using DiaryNotes20;
+@using DiaryNotes20.Models;
+
+<button class="btn-single" @onclick="AddBook">Add Book</button>
+<div class="item-single book">
+  <textarea class="book-text" placeholder="Untitled book"
+    rows=1 cols=50 @bind="NewTitle"></textarea>
+  <textarea class="book-text" placeholder="Blank cover" 
+    rows=20 cols=50 @bind="NewBody"></textarea>
+</div>
+
+@code {
+  private List<IPaper> Items = Program.AccessItems();
+  private string NewTitle;
+  private string NewBody;
+
+  private void AddBook()
+  {
+    if (!string.IsNullOrWhiteSpace(NewTitle) && Program.CurrentBaseTypeIsNote)
+    {
+      Items.Add(new Book{ Title = NewTitle, Body = NewBody });
+      NewTitle = string.Empty;
+      NewBody = string.Empty;
+    }
+    Navigator.NavigateTo("/main-view");
+  }
+}

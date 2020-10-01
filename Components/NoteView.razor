@@ -1,0 +1,40 @@
+@page "/note-view"
+@inject IModalService Modal
+@inject NavigationManager Navigator
+@using DiaryNotes20;
+@using DiaryNotes20.Components;
+
+<div class="item note" style="@CurrentColour">
+  <div class="item-banner">
+    <button class="item-btn-main" @onclick="EditNote">Edit</button>
+    <button class="item-btn-delete" @onclick="PrepareDeleteNote">Delete</button>
+  </div>  
+  <h2 class="note-text">@CurrentTitle</h2>
+  <p class="note-text">@CurrentBody</p>
+</div>
+
+@code {
+  [Parameter]
+  public string CurrentTitle { get; set; }
+
+  [Parameter]
+  public string CurrentBody { get; set; }
+
+  [Parameter]
+  public string CurrentColour { get; set; }
+
+  [Parameter]
+  public int CurrentId { get; set; }
+
+  private void EditNote()
+  {
+    Program.CurrentNoteItemId = CurrentId;
+    Navigator.NavigateTo("/edit-notes");
+  }
+
+  private void PrepareDeleteNote()
+  {
+    Program.CurrentNoteItemId = CurrentId;
+    Modal.Show<DeleteNoteView>(@CurrentTitle);
+  }
+}

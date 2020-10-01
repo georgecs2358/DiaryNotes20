@@ -1,0 +1,45 @@
+@page "/book-view"
+@inject IModalService Modal
+@inject NavigationManager Navigator
+
+<div class="item book" style="color:@CurrentColour">
+  <div class="item-banner">
+    <button class="item-btn-main" @onclick="ViewContents">View Contents</button>
+    <button class="item-btn-main" @onclick="EditBook">Edit Cover</button>
+    <button class="item-btn-delete" @onclick="PrepareDeleteBook">Delete</button>
+  </div>
+  <h2>@CurrentTitle</h2>
+  <p>@CurrentBody</p>
+</div>
+
+@code {
+  [Parameter]
+  public string CurrentTitle { get; set; }
+
+  [Parameter]
+  public string CurrentBody { get; set; }
+
+  [Parameter]
+  public string CurrentColour { get; set; }
+
+  [Parameter]
+  public int CurrentId { get; set; }
+
+  private void ViewContents()
+  {
+    Program.CurrentBookItemId = CurrentId;
+    Navigator.NavigateTo("/book-notes-view");
+  }
+
+  private void EditBook()
+  {
+    Program.CurrentBookItemId = CurrentId;
+    Navigator.NavigateTo("/edit-books");
+  }
+  
+  private void PrepareDeleteBook()
+  {
+    Program.CurrentBookItemId = CurrentId;
+    Modal.Show<DeleteBookView>(@CurrentTitle);
+  }
+}

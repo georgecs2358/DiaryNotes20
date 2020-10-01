@@ -1,0 +1,20 @@
+@page "/delete-book-view"
+@inject NavigationManager Navigator
+@using DiaryNotes20;
+@using DiaryNotes20.Models;
+
+<p>Are you sure you want to delete this book and all it's pages? This is 
+  irriversible and <em>all</em> the data will be swept up the .NET garbage 
+  collector.</p>
+
+<button class="btn-single" @onclick="DeleteBook">Delete</button>
+
+@code {
+  private IPaper Book;
+  private void DeleteBook()
+  {
+    Book = Program.AccessCurrentItem(IsNote: false);
+    Program.AccessItems().Remove(Book);
+    Navigator.NavigateTo("/main-view", true);
+  }
+}

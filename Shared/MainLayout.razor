@@ -1,0 +1,28 @@
+﻿@inherits LayoutComponentBase
+
+<div class="main">
+  <div class="top-row px-4">
+    <li class="nav-item px-3">
+      <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+        <span class="oi oi-home" aria-hidden="true"></span><br>
+        <strong>Lock View</strong></NavLink>
+    </li>
+    <li class="nav-item px-3">
+      <NavLink class="nav-link" href="main-view">
+        <span class="oi oi-list" aria-hidden="true"></span><br>
+        <strong>Your Notes</strong></NavLink>
+    </li>
+    <li class="nav-item px-3">
+      <NavLink class="nav-link" href="add-notes">
+        <span class="oi oi-plus" aria-hidden="true"></span><br>
+        <strong>Add a Note</strong></NavLink>
+    </li>
+    <li class="nav-item px-3">
+      <NavLink class="nav-link" href="add-books">
+        <span class="oi oi-plus" aria-hidden="true"></span><br>
+        <strong>Add a Book</strong></NavLink>
+    </li>
+  </div>
+
+  <div class="content px-4">@Body</div>
+</div>

@@ -1,0 +1,37 @@
+﻿@page "/main-view"
+@using DiaryNotes20.Components;
+@using DiaryNotes20;
+@using DiaryNotes20.Models;
+
+<h1>Your Notes</h1>
+
+<div class="items-grid">
+  @foreach (IPaper item in Items)
+  {
+    @if (item is Note)
+    {
+      <NoteView 
+        CurrentTitle=@item.Title 
+        CurrentBody=@item.Body 
+        CurrentColour=@item.Colour
+        CurrentId=@item.Id
+      />
+    } else {
+      <BookView 
+        CurrentTitle=@item.Title
+        CurrentBody=@item.Body
+        CurrentColour=@item.Colour
+        CurrentId=@item.Id
+      />
+    }
+  }
+</div>
+
+@code {
+  protected override void OnInitialized()
+  {
+    Program.CurrentBaseTypeIsNote = true;
+  }
+  
+  private List<IPaper> Items = Program.AccessItems();
+}

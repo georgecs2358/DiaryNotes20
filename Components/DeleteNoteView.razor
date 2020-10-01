@@ -1,0 +1,30 @@
+@page "/delete-note-view"
+@inject NavigationManager Navigator
+@using DiaryNotes20;
+@using DiaryNotes20.Models;
+
+<p>Are you sure you want to delete this note? This is irriversible and the data 
+  will be swept up the .NET garbage collector.</p>
+
+<button class="btn-single" @onclick="DeleteNote">Delete</button>
+
+@code {
+  private IPaper Note;
+  private void DeleteNote()
+  {
+    if (Program.CurrentBaseTypeIsNote)
+    {
+      Note = Program.AccessCurrentItem();
+      Program.AccessItems().Remove(Note);
+      Navigator.NavigateTo("/main-view", true);
+    } else {
+      @* List<IPaper> NoteFile = Program.AccessItems(rootID: Program.CurrentBookItemId);
+      Note = NoteFile.Find(note => note.Id == Program.CurrentNoteItemId); *@
+      Note = Program.AccessItems(rootID: Program.CurrentBookItemId).Find(
+        note => note.Id == Program.CurrentNoteItemId
+      );
+      Program.AccessItems(rootID: Program.CurrentBookItemId).Remove(Note);
+      Navigator.NavigateTo("/book-notes-view", true);
+    }
+  }
+}

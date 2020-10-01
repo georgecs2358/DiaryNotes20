@@ -1,0 +1,64 @@
+@page "/edit-notes"
+@inject NavigationManager Navigator
+@using DiaryNotes20;
+@using DiaryNotes20.Models;
+
+<button class="btn-single" @onclick="UpdateNote">Update Note</button>
+<div class="item-single note">
+  <textarea class="note-text" rows=1 cols=50 @bind="NewTitle">
+    @NewTitle
+  </textarea>
+  <textarea class="note-text" rows=20 cols=50 @bind="NewBody">
+    @NewBody
+  </textarea>
+</div>
+
+@code {
+  private static IPaper Note;
+  private string NewTitle;
+  private string NewBody;
+
+  protected override void OnParametersSet()
+  {
+    try
+    {
+      if (Program.CurrentBaseTypeIsNote)
+      {
+        Note = Program.AccessCurrentItem();
+      } else {
+        Note = Program.AccessItems(rootID: Program.CurrentBookItemId).Find(
+          note => note.Id == Program.CurrentNoteItemId
+        );
+      }
+    } catch (NullReferenceException e) {
+      Note = new Note{ Title = "Untitled note", Body = "..."};
+      Console.WriteLine("The EditNotes page was loaded too quickly.", e);
+    }
+    NewTitle = Note.Title;
+    NewBody = Note.Body;
+  }
+
+  private void UpdateNote()
+  {
+    if (string.IsNullOrWhiteSpace(NewTitle) 
+    && string.IsNullOrWhiteSpace(NewBody))
+    {
+      Note.Title = "Untitled note";
+      Note.Body = "Untitled body";
+    }
+    else if (string.IsNullOrWhiteSpace(NewTitle))
+    {
+      Note.Title = "Untitled note";
+      Note.Body = NewBody;
+    } else {
+      Note.Title = NewTitle;
+      Note.Body = NewBody;
+    }
+    if (Program.CurrentBaseTypeIsNote)
+    {
+      Navigator.NavigateTo("/main-view");
+    } else {
+      Navigator.NavigateTo("/book-notes-view");
+    }
+  }
+}

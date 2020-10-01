@@ -1,0 +1,52 @@
+@page "/edit-books"
+@inject NavigationManager Navigator
+@using DiaryNotes20;
+@using DiaryNotes20.Models;
+
+<button class="btn-single" @onclick="UpdateBook">Update Book</button>
+<div class="item-single book">
+  <textarea class="book-text" rows=1 cols=50 @bind="NewTitle">
+    @NewTitle
+  </textarea>
+  <textarea class="book-text" rows=10 cols=50 @bind="NewBio">
+    @NewBio
+  </textarea>
+</div>
+
+@code {
+  private static IPaper Book;
+  private string NewTitle;
+  private string NewBio;
+
+  protected override void OnParametersSet()
+  {
+    try
+    {
+      Book = Program.AccessCurrentItem(IsNote: false);
+    } catch (NullReferenceException e) {
+      Book = new Book{ Title = "Untitled note", Body = "..."};
+      Console.WriteLine("The EditBooks page was loaded too quickly.", e);
+    }
+    NewTitle = Book.Title;
+    NewBio = Book.Body;
+  }
+
+  private void UpdateBook()
+  {
+    if (string.IsNullOrWhiteSpace(NewTitle) 
+    && string.IsNullOrWhiteSpace(NewBio))
+    {
+      Book.Title = "Untitled book";
+      Book.Body = "Untitled bio";
+    }
+    else if (string.IsNullOrWhiteSpace(NewTitle))
+    {
+      Book.Title = "Untitled book";
+      Book.Body = NewBio;
+    } else {
+      Book.Title = NewTitle;
+      Book.Body = NewBio;
+    }
+    Navigator.NavigateTo("/main-view");
+  } 
+}

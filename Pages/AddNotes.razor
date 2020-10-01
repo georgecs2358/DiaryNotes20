@@ -1,0 +1,49 @@
+@page "/add-notes"
+@inject NavigationManager Navigator
+@using DiaryNotes20;
+@using DiaryNotes20.Models;
+
+<button class="btn-single" @onclick="AddNote">Add Note</button>
+<div class="item-single note">
+  <textarea class="note-text" placeholder="Untitled note" 
+    rows=1 cols=50 @bind="NewTitle"></textarea>
+  <textarea class="note-text" placeholder="Enter a body" 
+    rows=20 cols=50 @bind="NewBody"></textarea>
+</div>
+
+@code {
+  private List<IPaper> Items;
+  private string NewTitle;
+  private string NewBody;
+
+  protected override void OnInitialized()
+  {
+    if (Program.CurrentBaseTypeIsNote || Program.CurrentBookItemId == -1)
+    {
+      Items = Program.AccessItems();
+    } else {
+      Items = Program.AccessCurrentItem(IsNote: false).Pages;
+    }
+  }
+
+  private void AddNote()
+  {
+    if (!string.IsNullOrWhiteSpace(NewTitle) 
+    && !string.IsNullOrWhiteSpace(NewBody))
+    {
+      Items.Add(new Note{ Title = NewTitle, Body = NewBody });
+      NewTitle = NewBody = string.Empty;
+    }
+    else if (!string.IsNullOrWhiteSpace(NewBody))
+    {
+      Items.Add(new Note{ Title = "Untitled note", Body = NewBody});
+      NewBody = string.Empty;
+    }
+    if (Program.CurrentBaseTypeIsNote)
+    {
+      Navigator.NavigateTo("/main-view");
+    } else {
+      Navigator.NavigateTo("/book-notes-view");
+    }
+  }
+}

@@ -1,0 +1,229 @@
+@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+@font-face { font-family: Roboto; src: url("../fonts/Roboto-Regular.ttf"); }
+@font-face { font-family: Roboto-Black; src: url("../fonts/Roboto-Black.ttf"); }
+
+app {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+html, body, .main {
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 16px;
+  flex: 1;
+  background-image: url("../images/background.jpeg");
+  background-size: cover;
+}
+
+button {
+  text-align: center;
+  border: 1px solid #000;
+  border-radius: 2px;
+}
+
+textarea {
+  border: 3px solid #ccc;
+  padding: 5px;
+  background-color: #222;
+}
+
+h1 {
+  font-size: 2.5em;
+  color:#000;
+  text-decoration: underline;
+}
+
+h2, p {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+li {
+  color: #fff;
+}
+
+span {
+  padding-right: 0.5em;
+}
+
+.top-row {
+  height: 4em;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-items: flex-start;
+  background: rgb(170,170,170);
+  background: linear-gradient(
+    45deg, rgba(160,160,160,1) 30%, rgba(105,105,105,1) 70%
+  );
+  border: 1px solid #000;
+  padding: 2px;
+}
+
+.nav-item {
+  list-style-type: none;
+  padding-left: 1.5em;
+  width: 200px;
+}
+
+.nav-link {
+  display: flex;
+  flex-direction: row;
+  color: #000;
+  font-size: 1.25em;
+  text-decoration: none;
+  padding: 0.5em;
+}
+
+.nav-link:hover {
+  background-color: #fff;
+  border: 1px solid #000;
+}
+
+.content {
+  padding-top: 1em;
+  width: 100%;
+}
+
+#main-box {
+  border: 1px solid #000;
+  padding: 5px;
+  background: #007;
+  background: linear-gradient(
+    135deg, #005 30%, #009 55%
+  );
+}
+
+.items-grid {
+  padding: 1em;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  align-content: space-between;
+}
+
+.item {
+  border: 1px solid #000;
+  width: 300px;
+  height: 400px;
+  margin-bottom: 1.5em;
+}
+
+.item-single {
+  border: 1px solid #000;
+  width: 500px;
+  height: 600px;
+  padding: 2.5em;
+}
+
+.note {
+  background: #007;
+}
+
+.note-text {
+  color: #fff;
+}
+
+.book {
+  background: rgb(77, 26, 14);
+}
+
+  .book h2 {
+    font-size: 2em;
+    font-family: Roboto-Black;
+    color: #fff;
+  }
+
+  .book p {
+    font-size: 1.3em;
+    font-family: Roboto-Black;
+    color: #fff;
+  }
+
+.book-text {
+  font-family: Roboto-Black;
+  color: #fff;
+}
+
+.item-banner {
+  background-color: #444;
+  padding: 5px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: stretch;
+  min-height: 30px;
+}
+
+.btn-single {
+  background-color: #444;
+  font-size: 1.6em;
+  min-width: 100px;
+  padding: 5px;
+  margin: 30px 0px 30px 0px;
+}
+
+.item-btn-main {
+  background-color: #999;
+  font-size: 0.8em;
+  min-width: 80px;
+  padding-right: 5px;
+}
+
+.item-btn-delete {
+  background-color: #b22;
+  font-size: 0.8em;
+  min-width: 50px;
+}
+
+#blazor-error-ui {
+  background: lightyellow;
+  bottom: 0;
+  box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+  display: none;
+  left: 0;
+  padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+
+#blazor-error-ui .dismiss {
+  cursor: pointer;
+  position: absolute;
+  right: 0.75rem;
+  top: 0.5rem;
+}
+
+@media (max-width: 767.98px) {
+  .main .top-row:not(.auth) {
+    display: none;
+  }
+
+  .main .top-row.auth {
+    justify-content: space-between;
+  }
+
+  .main .top-row a, .main .top-row .btn-link {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  app {
+    flex-direction: row;
+  }
+
+  .main .top-row {
+    position: sticky;
+    top: 0;
+  }
+
+  .main > div {
+    padding-left: 2rem !important;
+    padding-right: 1.5rem !important;
+  }
+}

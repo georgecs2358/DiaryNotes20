@@ -1,0 +1,28 @@
+@page "/book-notes-view"
+@using DiaryNotes20.Components;
+@using DiaryNotes20;
+@using DiaryNotes20.Models;
+
+<h1>"@Program.AccessCurrentItem(IsNote: false).Title" Pages</h1>
+
+<div class="items-grid">
+  @foreach (IPaper item in Pages)
+  {
+    <NoteView 
+      CurrentTitle=@item.Title 
+      CurrentBody=@item.Body 
+      CurrentColour=@item.Colour
+      CurrentId=@item.Id
+    />
+  }
+</div>
+
+@code {
+  protected override void OnInitialized()
+  {
+    Program.CurrentBaseTypeIsNote = false;
+    // Pages = Program.AccessCurrentItem(IsNote: false).Pages;
+    Pages = Program.AccessItems(rootID: Program.CurrentBookItemId);
+  }
+  private List<IPaper> Pages;
+}
