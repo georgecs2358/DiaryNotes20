@@ -2,6 +2,10 @@
 @using DiaryNotes20.Components;
 @inject IModalService Modal
 
+<div id="lock-box">
+  <button class="btn-single" @onclick="ToggleLock">Lock/unlock notes</button>
+</div>
+
 <div id="main-box">
   <h1 class="note-text">DiaryNotes20</h1>
   <h2 class="note-text">An open-source, customisable notes app.</h2>
@@ -15,3 +19,17 @@
     <li>Click on any note or book to edit or delete the contents!</li>
   </ul>
 </div>
+
+@code {
+  private bool IsLocked = true;
+  private void ToggleLock()
+  {
+    if (IsLocked)
+    {
+      Program.LoadNotes();
+    } else {
+      Program.SaveNotes();
+    }
+    IsLocked = !(IsLocked);
+  }
+}
