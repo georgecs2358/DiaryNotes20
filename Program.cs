@@ -43,12 +43,7 @@ namespace DiaryNotes20
         GetData = File.ReadAllText(@"C:\Users\Public\DiaryNotesData.json");
       } catch (FileNotFoundException e) {
         Console.WriteLine(e.Message, "Hence a default data file was created.");
-        GetData = @"{""Items"":[{""Title"":""Untitled book"",
-        ""Body"":"""",""Colour"":""#654321"",""Id"":420846611,""IsFav"":false,
-        ""Pages"":[{""Title"":""Untitled note"",""Body"":"""",""Colour"":
-        ""#444"",""Id"":134464447,""IsFav"":false,""Pages"":null}]},{""Title"":
-        ""Untitled note"",""Body"":"""",""Colour"":""#444"",""Id"":822834995,
-        ""IsFav"":false,""Pages"":null}]}";
+        GetData = @"{""Items"":[{""Title"":""Untitled book"",""Body"":"""",""Colour"":""#654321"",""Id"":420846611,""IsFav"":false,""Pages"":[{""Title"":""Untitled note"",""Body"":"""",""Colour"":""#444"",""Id"":134464447,""IsFav"":false,""Pages"":null}]},{""Title"":""Untitled note"",""Body"":"""",""Colour"":""#444"",""Id"":822834995,""IsFav"":false,""Pages"":null}]}";
         TextWriter textWriter = new StreamWriter(
           @"C:\Users\Public\DiaryNotesData.json"
         );
