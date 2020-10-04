@@ -12,17 +12,18 @@
 </div>
 
 @code {
-  private List<IPaper> Items;
+  private List<Note> Notes;
   private string NewTitle;
   private string NewBody;
 
   protected override void OnInitialized()
   {
-    if (Program.CurrentBaseTypeIsNote || Program.CurrentBookItemId == -1)
+    if (AppBuilder.CurrentBaseTypeIsNote || AppBuilder.CurrentBookItemId == -1)
     {
-      Items = Program.AccessItems();
-    } else {
-      Items = Program.AccessCurrentItem(IsNote: false).Pages;
+      Notes = AppBuilder.Folder.Notes;
+    } 
+    else {
+      Notes = AppBuilder.AccessCurrentBookItem().Pages;
     }
   }
 
@@ -31,15 +32,16 @@
     if (!string.IsNullOrWhiteSpace(NewTitle) 
     && !string.IsNullOrWhiteSpace(NewBody))
     {
-      Items.Add(new Note{ Title = NewTitle, Body = NewBody });
+      Notes.Add(new Note{ Title = NewTitle, Body = NewBody });
       NewTitle = NewBody = string.Empty;
     }
     else if (!string.IsNullOrWhiteSpace(NewBody))
     {
-      Items.Add(new Note{ Title = "Untitled note", Body = NewBody});
+      Notes.Add(new Note{ Title = "Untitled note", Body = NewBody });
       NewBody = string.Empty;
     }
-    if (Program.CurrentBaseTypeIsNote)
+    
+    if (AppBuilder.CurrentBaseTypeIsNote)
     {
       Navigator.NavigateTo("/main-view");
     } else {

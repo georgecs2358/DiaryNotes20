@@ -14,7 +14,7 @@
 </div>
 
 @code {
-  private static IPaper Note;
+  private static Note Note;
   private string NewTitle;
   private string NewBody;
 
@@ -22,12 +22,12 @@
   {
     try
     {
-      if (Program.CurrentBaseTypeIsNote)
+      if (AppBuilder.CurrentBaseTypeIsNote)
       {
-        Note = Program.AccessCurrentItem();
+        Note = AppBuilder.AccessCurrentNoteItem();
       } else {
-        Note = Program.AccessItems(rootID: Program.CurrentBookItemId).Find(
-          note => note.Id == Program.CurrentNoteItemId
+        Note = AppBuilder.AccessBookContents(AppBuilder.CurrentBookItemId).Find(
+          note => note.Id == AppBuilder.CurrentNoteItemId
         );
       }
     } catch (NullReferenceException e) {
@@ -54,7 +54,7 @@
       Note.Title = NewTitle;
       Note.Body = NewBody;
     }
-    if (Program.CurrentBaseTypeIsNote)
+    if (AppBuilder.CurrentBaseTypeIsNote)
     {
       Navigator.NavigateTo("/main-view");
     } else {

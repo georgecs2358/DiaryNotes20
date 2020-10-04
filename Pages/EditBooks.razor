@@ -14,7 +14,7 @@
 </div>
 
 @code {
-  private static IPaper Book;
+  private static Book Book;
   private string NewTitle;
   private string NewBio;
 
@@ -22,9 +22,9 @@
   {
     try
     {
-      Book = Program.AccessCurrentItem(IsNote: false);
+      Book = AppBuilder.AccessCurrentBookItem();
     } catch (NullReferenceException e) {
-      Book = new Book{ Title = "Untitled note", Body = "..."};
+      Book = new Book{ Title = "Untitled book", Body = "..."};
       Console.WriteLine("The EditBooks page was loaded too quickly.", e);
     }
     NewTitle = Book.Title;

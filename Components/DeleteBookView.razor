@@ -10,11 +10,11 @@
 <button class="item-btn-delete" @onclick="DeleteBook">Delete</button>
 
 @code {
-  private IPaper Book;
+  private Book Book;
   private void DeleteBook()
   {
-    Book = Program.AccessCurrentItem(IsNote: false);
-    Program.AccessItems().Remove(Book);
+    Book = AppBuilder.AccessCurrentBookItem();
+    AppBuilder.Folder.Books.Remove(Book);
     Navigator.NavigateTo("/main-view", true);
   }
 }

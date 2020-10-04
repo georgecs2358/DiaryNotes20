@@ -9,21 +9,20 @@
 <button class="item-btn-delete" @onclick="DeleteNote">Delete</button>
 
 @code {
-  private IPaper Note;
+  private Note Note;
   private void DeleteNote()
   {
-    if (Program.CurrentBaseTypeIsNote)
+    if (AppBuilder.CurrentBaseTypeIsNote)
     {
-      Note = Program.AccessCurrentItem();
-      Program.AccessItems().Remove(Note);
+      Note = AppBuilder.AccessCurrentNoteItem();
+      AppBuilder.Folder.Notes.Remove(Note);
       Navigator.NavigateTo("/main-view", true);
-    } else {
-      @* List<IPaper> NoteFile = Program.AccessItems(rootID: Program.CurrentBookItemId);
-      Note = NoteFile.Find(note => note.Id == Program.CurrentNoteItemId); *@
-      Note = Program.AccessItems(rootID: Program.CurrentBookItemId).Find(
-        note => note.Id == Program.CurrentNoteItemId
+    } 
+    else {
+      Note = AppBuilder.AccessBookContents(AppBuilder.CurrentBookItemId).Find(
+        note => note.Id == AppBuilder.CurrentNoteItemId
       );
-      Program.AccessItems(rootID: Program.CurrentBookItemId).Remove(Note);
+      AppBuilder.AccessBookContents(AppBuilder.CurrentBookItemId).Remove(Note);
       Navigator.NavigateTo("/book-notes-view", true);
     }
   }

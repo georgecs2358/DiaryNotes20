@@ -3,10 +3,10 @@
 @using DiaryNotes20;
 @using DiaryNotes20.Models;
 
-<h1>"@Program.AccessCurrentItem(IsNote: false).Title" Pages</h1>
+<h1>"@AppBuilder.AccessCurrentBookItem().Title" Pages</h1>
 
 <div class="items-grid">
-  @foreach (IPaper item in Pages)
+  @foreach (Note item in Pages)
   {
     <NoteView 
       CurrentTitle=@item.Title 
@@ -20,9 +20,8 @@
 @code {
   protected override void OnInitialized()
   {
-    Program.CurrentBaseTypeIsNote = false;
-    // Pages = Program.AccessCurrentItem(IsNote: false).Pages;
-    Pages = Program.AccessItems(rootID: Program.CurrentBookItemId);
+    AppBuilder.CurrentBaseTypeIsNote = false;
+    Pages = AppBuilder.AccessBookContents(AppBuilder.CurrentBookItemId);
   }
-  private List<IPaper> Pages;
+  private List<Note> Pages;
 }

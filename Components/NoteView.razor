@@ -28,13 +28,13 @@
 
   private void EditNote()
   {
-    Program.CurrentNoteItemId = CurrentId;
+    AppBuilder.CurrentNoteItemId = CurrentId;
     Navigator.NavigateTo("/edit-notes");
   }
 
   private void PrepareDeleteNote()
   {
-    Program.CurrentNoteItemId = CurrentId;
+    AppBuilder.CurrentNoteItemId = CurrentId;
     Modal.Show<DeleteNoteView>(@CurrentTitle);
   }
 }

@@ -6,11 +6,13 @@ namespace DiaryNotes20.Models
   {
     public Folder()
     {
-      Items = new List<IPaper>();
+      Notes = new List<Note>();
       Note placeholder = new Note{ Title = "Untitled note", Body = "Undefined"};
-      Items.Add(placeholder);
+      Notes.Add(placeholder);
+      Books = new List<Book>();
     }
 
-    public List<IPaper> Items { get; set; }
+    public List<Note> Notes { get; set; }
+    public List<Book> Books { get; set; }
   }
 }

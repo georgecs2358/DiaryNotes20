@@ -27,19 +27,19 @@
 
   private void ViewContents()
   {
-    Program.CurrentBookItemId = CurrentId;
+    AppBuilder.CurrentBookItemId = CurrentId;
     Navigator.NavigateTo("/book-notes-view");
   }
 
   private void EditBook()
   {
-    Program.CurrentBookItemId = CurrentId;
+    AppBuilder.CurrentBookItemId = CurrentId;
     Navigator.NavigateTo("/edit-books");
   }
   
   private void PrepareDeleteBook()
   {
-    Program.CurrentBookItemId = CurrentId;
+    AppBuilder.CurrentBookItemId = CurrentId;
     Modal.Show<DeleteBookView>(@CurrentTitle);
   }
 }

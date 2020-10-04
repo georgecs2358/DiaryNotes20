@@ -12,15 +12,15 @@
 </div>
 
 @code {
-  private List<IPaper> Items = Program.AccessItems();
+  private List<Book> Books = AppBuilder.Folder.Books;
   private string NewTitle;
   private string NewBody;
 
   private void AddBook()
   {
-    if (!string.IsNullOrWhiteSpace(NewTitle) && Program.CurrentBaseTypeIsNote)
+    if (!string.IsNullOrWhiteSpace(NewTitle) && AppBuilder.CurrentBaseTypeIsNote)
     {
-      Items.Add(new Book{ Title = NewTitle, Body = NewBody });
+      Books.Add(new Book{ Title = NewTitle, Body = NewBody });
       NewTitle = string.Empty;
       NewBody = string.Empty;
     }

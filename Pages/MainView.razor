@@ -30,8 +30,8 @@
 @code {
   protected override void OnInitialized()
   {
-    Program.CurrentBaseTypeIsNote = true;
+    AppBuilder.CurrentBaseTypeIsNote = true;
   }
   
-  private List<IPaper> Items = Program.AccessItems();
+  private List<IPaper> Items = AppBuilder.AccessItems();
 }
