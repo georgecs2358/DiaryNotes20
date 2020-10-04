@@ -24,21 +24,21 @@ namespace DiaryNotes20
 
     public static void LoadNotes()
     {
-      string GetData = null;
+      string data = null;
       try
-      { GetData = File.ReadAllText(@"C:\Users\Public\DiaryNotesData.json"); } 
+      { data = File.ReadAllText(@"C:\Users\Public\DiaryNotesData.json"); } 
       catch (FileNotFoundException e) 
       {
         Console.WriteLine(e.Message, "Hence a default data file was created.");
-        GetData = @"{""Notes"":[{""Id"":1893539463,""Title"":""Welcome to DiaryNotes20 :)"",""Body"":""..."",""Colour"":""#007""}],""Books"":[]}";
-        TextWriter textWriter = new StreamWriter(
+        data = @"{""Notes"":[{""Id"":1893539463,""Title"":""Welcome to DiaryNotes20 :)"",""Body"":""..."",""Colour"":""#007""}],""Books"":[]}";
+        TextWriter writer = new StreamWriter(
           @"C:\Users\Public\DiaryNotesData.json"
         );
-        textWriter.WriteLine(GetData);
-        textWriter.Close();
+        writer.WriteLine(data);
+        writer.Close();
       } 
       finally 
-      { AppBuilder.Folder = JsonSerializer.Deserialize<Folder>(GetData); }
+      { AppBuilder.Folder = JsonSerializer.Deserialize<Folder>(data); }
     }
 
     public static void SaveNotes()

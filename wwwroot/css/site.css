@@ -49,6 +49,12 @@ span {
   padding-right: 8px;
 }
 
+img {
+  width: 150px;
+  height: 150px;
+  padding: 1em;
+}
+
 .top-row {
   height: 4em;
   top: 0;
@@ -88,6 +94,25 @@ span {
 .content {
   width: 100%;
   padding-top: 1em;
+}
+
+#lock-box {
+  width: 800px;
+  border: 1px solid #000;
+  padding: 0.5em;
+  background: #080;
+  background: linear-gradient(
+    135deg, #060 30%, #0a0 55%
+  );
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn-main {
+  background-color: #444;
+  font-size: 1.6em;
+  padding: 5px;
+  margin: 30px 0px 30px 0px;
 }
 
 #main-box {

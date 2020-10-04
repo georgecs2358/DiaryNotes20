@@ -1,9 +1,10 @@
 ﻿@page "/"
-@using DiaryNotes20.Components;
-@inject IModalService Modal
+@inject NavigationManager Navigator
 
 <div id="lock-box">
-  <button class="btn-single" @onclick="ToggleLock">Lock/unlock notes</button>
+  <img src="/images/lock.png"/>
+  <button class="btn-main" @onclick="Load">Load your notes</button>
+  <button class="btn-main" @onclick="Save">Save changes</button>
 </div>
 
 <div id="main-box">
@@ -16,20 +17,13 @@
   <ul>
     <li>View your notes at 'Your Notes'</li>
     <li>Add an item at 'Add a Note', 'Add a Book'</li>
-    <li>Click on any note or book to edit or delete the contents!</li>
+    <li>Click on any note or book to edit or delete the contents</li>
+    <li>Remember to save your changes before quitting!</li>
   </ul>
 </div>
 
-@code {
-  private bool IsLocked = true;
-  private void ToggleLock()
-  {
-    if (IsLocked)
-    {
-      Program.LoadNotes();
-    } else {
-      Program.SaveNotes();
-    }
-    IsLocked = !(IsLocked);
-  }
+@code 
+{
+  private void Load() { Program.LoadNotes(); }
+  private void Save() { Program.SaveNotes(); }
 }
