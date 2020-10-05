@@ -1,5 +1,7 @@
 ﻿@page "/"
+@inject IModalService Modal
 @inject NavigationManager Navigator
+@using DiaryNotes20.Components;
 
 <div id="lock-box">
   <img src="/images/lock.png"/>
@@ -24,6 +26,14 @@
 
 @code 
 {
-  private void Load() { Program.LoadNotes(); }
-  private void Save() { Program.SaveNotes(); }
+  private void Load() 
+  { 
+    Program.LoadNotes();
+    Modal.Show<LoadView>("Load Notes"); 
+  }
+  private void Save() 
+  { 
+    Program.SaveNotes();
+    Modal.Show<LoadView>("Save Notes"); 
+  }
 }
